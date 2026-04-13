@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mission } from "../types/game";
+import type { Mission } from "../types/game";
 
 interface Props {
   onAdd: (mission: Mission) => void;

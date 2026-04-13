@@ -5,7 +5,8 @@ import { useGameState } from "./hooks/useGameState";
 import CharacterSheet from "./components/CharacterSheet";
 
 export default function App() {
-  const { state, addMission, setState } = useGameState();
+
+  const { state, addMission, completeMission, setState } = useGameState();  
 
   return (
     <div style={{ padding: 20 }}>
@@ -17,7 +18,7 @@ export default function App() {
 
       <MissionForm onAdd={addMission} />
 
-      <MissionList missions={state.missions} />
+      <MissionList missions={state.missions} onComplete={completeMission} />
     </div>
   );
 }

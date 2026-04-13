@@ -26,7 +26,7 @@ export default function MissionList({ missions, onComplete }: Props) {
 
       setActiveMissionId(null);
       setInput("");
-    } catch (err) {
+    } catch {
       alert("Invalid JSON format");
     }
   }

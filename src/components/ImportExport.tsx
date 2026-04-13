@@ -1,6 +1,8 @@
+import type { GameState } from "../types/game";
+
 interface Props {
-  state: any;
-  onImport: (data: any) => void;
+  state: GameState;
+  onImport: (data: GameState) => void;
 }
 
 export default function ImportExport({ state, onImport }: Props) {
@@ -14,6 +16,7 @@ export default function ImportExport({ state, onImport }: Props) {
     a.href = url;
     a.download = "rpg-save.json";
     a.click();
+    URL.revokeObjectURL(url);
   }
 
   function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
@@ -22,8 +25,13 @@ export default function ImportExport({ state, onImport }: Props) {
 
     const reader = new FileReader();
     reader.onload = () => {
-      const data = JSON.parse(reader.result as string);
-      onImport(data);
+      try {
+        const data = JSON.parse(reader.result as string);
+        onImport(data);
+      } catch (error) {
+        console.error("Failed to import save file.", error);
+        alert("Invalid save file. Please import a valid JSON export.");
+      }
     };
     reader.readAsText(file);
   }
