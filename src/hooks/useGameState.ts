@@ -208,7 +208,7 @@ export function useGameState() {
         updatedStats[key as StatKey].xp += value;
       });
 
-      return {
+      return recalculateGameState({
         ...prev,
         character: {
           ...prev.character,
@@ -216,7 +216,7 @@ export function useGameState() {
         },
         stats: updatedStats,
         missions: updatedMissions,
-      };
+      });
     });
   }
 
