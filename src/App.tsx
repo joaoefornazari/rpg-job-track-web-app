@@ -5,7 +5,7 @@ import MissionList from "./components/MissionList";
 import { useGameState } from "./hooks/useGameState";
 
 export default function App() {
-  const { state, addMission, completeMission, setState } = useGameState();
+  const { state, addMission, completeMission, importState } = useGameState();
 
   const readyCount = state.missions.filter(
     (mission) => mission.status === "ready"
@@ -47,7 +47,7 @@ export default function App() {
       <main className="flex flex-col gap-6">
         <div className="flex flex-col gap-6">
           <CharacterSheet state={state} />
-          <ImportExport state={state} onImport={setState} />
+          <ImportExport state={state} onImport={importState} />
         </div>
 
         <div className="flex flex-col gap-6">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { GameState, Mission, Reward, StatKey } from "../types/game";
+import { recalculateGameState } from "../utils/recalculate";
 
 const STORAGE_KEY = "rpg_state";
 const STAT_KEYS: StatKey[] = [
@@ -15,7 +16,7 @@ function createDefaultState(): GameState {
   return {
     character: {
       name: "JWolf",
-      level: 7,
+      level: 0,
       total_xp: 0,
       title: "System Stabilizer",
       next_level_xp_threshold: 0,
@@ -223,10 +224,16 @@ export function useGameState() {
     rawSetState(normalizeGameState(nextState));
   }
 
+  function importState(newState: GameState) {
+    const recalculated = recalculateGameState(newState);
+    setState(recalculated);
+  }
+
   return {
     state,
     addMission,
     completeMission,
+    importState,
     setState,
   };
 }
