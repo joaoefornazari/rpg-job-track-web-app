@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Mission, StatKey } from "../types/game";
+import { missionPrompt } from "../utils/prompt";
 
 interface Props {
   missions: Mission[];
@@ -133,6 +134,13 @@ export default function MissionList({
 
                         <button
                           type="button"
+                          className="action-secondary w-full sm:w-auto"
+                          onClick={() => handleCopyPrompt(mission)}>
+                          Copy Prompt
+                        </button>
+
+                        <button
+                          type="button"
                           onClick={() =>
                             setActiveMissionId(isActive ? null : mission.id)
                           }
@@ -189,6 +197,12 @@ function MetaItem({ label, value }: MetaItemProps) {
       <p className="mt-2 text-sm font-medium text-white">{value}</p>
     </div>
   );
+}
+
+function handleCopyPrompt(mission: Mission) {
+  const prompt = missionPrompt(mission);
+  navigator.clipboard.writeText(prompt);
+  alert("Prompt copied!");
 }
 
 function getStatusClasses(status: Mission["status"]) {
