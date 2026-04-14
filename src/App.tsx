@@ -5,7 +5,8 @@ import MissionList from "./components/MissionList";
 import { useGameState } from "./hooks/useGameState";
 
 export default function App() {
-  const { state, addMission, completeMission, importState } = useGameState();
+  const { state, addMission, markMissionInProgress, completeMission, importState } =
+    useGameState();
 
   const readyCount = state.missions.filter(
     (mission) => mission.status === "ready"
@@ -46,7 +47,11 @@ export default function App() {
 
         <div className="flex flex-col gap-6">
           <MissionForm onAdd={addMission} />
-          <MissionList missions={state.missions} onComplete={completeMission} />
+          <MissionList
+            missions={state.missions}
+            onMarkInProgress={markMissionInProgress}
+            onComplete={completeMission}
+          />
         </div>
       </main>
     </div>

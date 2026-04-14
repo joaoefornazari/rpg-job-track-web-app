@@ -3,6 +3,7 @@ import type { Mission, StatKey } from "../types/game";
 
 interface Props {
   missions: Mission[];
+  onMarkInProgress: (missionId: string) => void;
   onComplete: (
     missionId: string,
     xp: number,
@@ -10,7 +11,11 @@ interface Props {
   ) => void;
 }
 
-export default function MissionList({ missions, onComplete }: Props) {
+export default function MissionList({
+  missions,
+  onMarkInProgress,
+  onComplete,
+}: Props) {
   const [activeMissionId, setActiveMissionId] = useState<string | null>(null);
   const [input, setInput] = useState("");
 
@@ -65,6 +70,10 @@ export default function MissionList({ missions, onComplete }: Props) {
         <div className="grid gap-4">
           {missions.map((mission) => {
             const isActive = activeMissionId === mission.id;
+            const canMarkInProgress =
+              mission.status !== "in progress" && mission.status !== "finished";
+            const canComplete =
+              mission.status === "ready" || mission.status === "in progress";
 
             return (
               <article
@@ -102,23 +111,36 @@ export default function MissionList({ missions, onComplete }: Props) {
                   </div>
                 ) : null}
 
-                {mission.status === "ready" ? (
+                {canComplete ? (
                   <div className="grid gap-4 rounded-2xl border border-white/10 bg-slate-900/55 p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <p className="text-xs leading-6 text-slate-300">
-                        Paste the completion JSON payload when this mission is
-                        ready to be resolved.
+                        Mark a mission as in progress or paste the completion
+                        JSON payload when it is ready to be resolved.
                       </p>
 
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setActiveMissionId(isActive ? null : mission.id)
-                        }
-                        className="action-secondary w-full sm:w-auto"
-                      >
-                        {isActive ? "Hide reward input" : "Complete mission"}
-                      </button>
+                      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                        <button
+                          type="button"
+                          onClick={() => onMarkInProgress(mission.id)}
+                          disabled={!canMarkInProgress}
+                          className="action-secondary w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                        >
+                          {mission.status === "in progress"
+                            ? "In progress"
+                            : "Mark in progress"}
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setActiveMissionId(isActive ? null : mission.id)
+                          }
+                          className="action-secondary w-full sm:w-auto"
+                        >
+                          {isActive ? "Hide reward input" : "Complete mission"}
+                        </button>
+                      </div>
                     </div>
 
                     {isActive ? (
