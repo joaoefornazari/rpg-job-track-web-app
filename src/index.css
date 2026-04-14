@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import "tailwindcss";
 
 @layer base {
@@ -17,7 +18,8 @@
       radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.16), transparent 28%),
       linear-gradient(180deg, #0f172a 0%, #020617 100%);
     color: #e2e8f0;
-    font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+    font-family: "Press Start 2P", system-ui;
+    font-size: 0.85rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

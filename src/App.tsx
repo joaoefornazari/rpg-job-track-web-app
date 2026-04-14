@@ -17,22 +17,16 @@ export default function App() {
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
       <header className="panel overflow-hidden px-6 py-6 sm:px-8 sm:py-8">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(320px,0.9fr)] xl:items-end">
+        <div className="flex flex-col gap-6">
           <div className="space-y-4">
             <span className="inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200">
               Quest Board
             </span>
 
-            <div className="space-y-3">
-              <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                RPG Job Track
+            <div className="space-y-4 m-2">
+              <h1 className="text-4xl font-bold tracking-tight text-white">
+                RPG Job Tracker
               </h1>
-
-              <p className="max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
-                Organize your missions, keep your character sheet visible, and
-                distribute XP with layouts that stay readable from phone screens
-                to wide dashboards.
-              </p>
             </div>
           </div>
 

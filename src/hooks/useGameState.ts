@@ -23,12 +23,12 @@ function createDefaultState(): GameState {
       cosmetics: [],
     },
     stats: {
-      knowledge: { xp: 0, level: 0 },
-      focus: { xp: 0, level: 0 },
-      delivery: { xp: 0, level: 0 },
-      product_sense: { xp: 0, level: 0 },
-      ownership: { xp: 0, level: 0 },
-      alignment: { xp: 0, level: 0 },
+      knowledge: { xp: 0 },
+      focus: { xp: 0 },
+      delivery: { xp: 0 },
+      product_sense: { xp: 0 },
+      ownership: { xp: 0 },
+      alignment: { xp: 0 },
     },
     missions: [],
     rewards: [],
@@ -136,7 +136,6 @@ function normalizeGameState(value: unknown): GameState {
 
       acc[key] = {
         xp: typeof stat.xp === "number" ? stat.xp : 0,
-        level: typeof stat.level === "number" ? stat.level : 0,
       };
 
       return acc;

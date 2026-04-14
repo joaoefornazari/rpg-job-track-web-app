@@ -8,7 +8,6 @@ export type StatKey =
 
 export interface Stat {
   xp: number;
-  level: number;
 }
 
 export type Stats = Record<StatKey, Stat>;

@@ -20,7 +20,7 @@ export default function MissionForm({ onAdd }: Props) {
       status: "ready",
       tags: [],
       priority: Math.floor(Math.random() % 5) + 1,
-      notes: "",
+      notes: [],
     };
 
     onAdd(newMission);
@@ -33,10 +33,10 @@ export default function MissionForm({ onAdd }: Props) {
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
           <p className="field-label">Mission Intake</p>
-          <h2 className="text-2xl font-semibold tracking-tight text-white">
+          <h2 className="text-xl font-semibold tracking-tight text-white">
             Add a new mission
           </h2>
-          <p className="max-w-2xl text-sm leading-6 text-slate-300">
+          <p className="max-w-4xl text-xs leading-6 text-slate-300">
             Capture the next task quickly, then keep the details organized in a
             responsive grid instead of stacking raw fields one after another.
           </p>

@@ -35,10 +35,10 @@ export default function MissionList({ missions, onComplete }: Props) {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-2">
           <p className="field-label">Mission Log</p>
-          <h2 className="text-2xl font-semibold tracking-tight text-white">
+          <h2 className="text-xl font-semibold tracking-tight text-white">
             Current quests
           </h2>
-          <p className="max-w-2xl text-sm leading-6 text-slate-300">
+          <p className="max-w-2xl text-xs leading-6 text-slate-300">
             Review the backlog, paste reward payloads, and keep completion flow
             contained inside each mission card.
           </p>
@@ -74,7 +74,7 @@ export default function MissionList({ missions, onComplete }: Props) {
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div className="space-y-3">
                     <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-xl font-semibold tracking-tight text-white">
+                      <h3 className="text-lg font-semibold tracking-tight text-white">
                         {mission.title}
                       </h3>
                       <span className={getStatusClasses(mission.status)}>
@@ -82,12 +82,12 @@ export default function MissionList({ missions, onComplete }: Props) {
                       </span>
                     </div>
 
-                    <p className="max-w-2xl text-sm leading-6 text-slate-300">
+                    <p className="max-w-4xl text-xs leading-6 text-slate-300">
                       {mission.description || "No description added yet."}
                     </p>
                   </div>
 
-                  <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 sm:grid-cols-2 lg:min-w-64">
+                  <div className="flex flex-row flex-wrap rounded-2xl border border-white/10 bg-white/5 p-4 sm:grid-cols-2 lg:min-w-64">
                     <MetaItem label="Priority" value={`P${mission.priority}`} />
                     <MetaItem label="Date" value={formatDate(mission.date)} />
                   </div>
@@ -105,7 +105,7 @@ export default function MissionList({ missions, onComplete }: Props) {
                 {mission.status === "ready" ? (
                   <div className="grid gap-4 rounded-2xl border border-white/10 bg-slate-900/55 p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="text-sm leading-6 text-slate-300">
+                      <p className="text-xs leading-6 text-slate-300">
                         Paste the completion JSON payload when this mission is
                         ready to be resolved.
                       </p>
@@ -160,7 +160,7 @@ interface MetaItemProps {
 
 function MetaItem({ label, value }: MetaItemProps) {
   return (
-    <div>
+    <div className="m-2">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
         {label}
       </p>

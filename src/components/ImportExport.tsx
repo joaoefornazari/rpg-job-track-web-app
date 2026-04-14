@@ -41,10 +41,10 @@ export default function ImportExport({ state, onImport }: Props) {
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="space-y-2">
           <p className="field-label">Save Data</p>
-          <h2 className="text-2xl font-semibold tracking-tight text-white">
+          <h2 className="text-xl font-semibold tracking-tight text-white">
             Import or export progress
           </h2>
-          <p className="max-w-xl text-sm leading-6 text-slate-300">
+          <p className="text-sm text-gray-400">
             Move your save file between devices without breaking the layout or
             losing track of your current mission state.
           </p>
@@ -54,13 +54,13 @@ export default function ImportExport({ state, onImport }: Props) {
           <button
             type="button"
             onClick={handleExport}
-            className="action-secondary w-full sm:w-auto"
+            className="action-secondary w-full sm:w-auto text-align-left"
           >
             Export save
           </button>
 
-          <label className="action-primary w-full cursor-pointer sm:w-auto">
-            <span>Import save</span>
+          <label className="action-primary w-full sm:w-auto text-align-left cursor-pointer">
+            <span style={{ textAlign: "center" }}>Import save</span>
             <input
               type="file"
               accept="application/json,.json"

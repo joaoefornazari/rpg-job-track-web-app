@@ -16,11 +16,11 @@ export default function CharacterSheet({ state }: Props) {
         >
           <div id="character-sheet-identity" className="space-y-3">
             <p className="field-label">Character Sheet</p>
-            <h2 className="text-3xl font-semibold tracking-tight text-white">
+            <h2 className="text-2xl font-semibold tracking-tight text-white">
               {character.name}
             </h2>
-            <p className="text-sm leading-6 text-slate-300">
-              {character.title}
+            <p className="text-md leading-6 text-slate-300">
+              <b>{character.title}</b>
             </p>
           </div>
 
@@ -73,9 +73,8 @@ export default function CharacterSheet({ state }: Props) {
 
                   <div id={`character-sheet-stat-values-${toIdSegment(key)}`} className="pt-4">
                     <p className="text-lg font-semibold text-cyan-300">
-                      Lv. {stat.level}
+                      {stat.xp} XP
                     </p>
-                    <p className="mt-1 text-sm text-slate-400">{stat.xp} XP</p>
                   </div>
                 </div>
               ))}

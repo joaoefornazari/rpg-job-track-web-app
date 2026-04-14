@@ -1,4 +1,4 @@
-import type { GameState, StatKey } from "../types/game";
+import type { GameState } from "../types/game";
 import { calculateLevel, xpToNextLevel } from "./level";
 
 export function recalculateGameState(state: GameState): GameState {
@@ -7,18 +7,6 @@ export function recalculateGameState(state: GameState): GameState {
   const characterLevel = calculateLevel(totalXp);
   const nextLevelXp = xpToNextLevel(characterLevel);
 
-  // 🧠 Stats (auto-level each one)
-  const updatedStats = { ...state.stats };
-
-  (Object.keys(updatedStats) as StatKey[]).forEach((key) => {
-    const statXp = updatedStats[key].xp;
-
-    updatedStats[key] = {
-      ...updatedStats[key],
-      level: calculateLevel(statXp),
-    };
-  });
-
   return {
     ...state,
     character: {
@@ -26,6 +14,5 @@ export function recalculateGameState(state: GameState): GameState {
       level: characterLevel,
       next_level_xp_threshold: nextLevelXp,
     },
-    stats: updatedStats,
   };
 }
