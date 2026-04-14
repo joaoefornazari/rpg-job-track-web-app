@@ -77,6 +77,24 @@ function normalizeMission(value: unknown): Mission | null {
   };
 }
 
+function ensureUniqueMissionIds(missions: Mission[]): Mission[] {
+  const seenIds = new Set<string>();
+
+  return missions.map((mission) => {
+    if (!mission.id || seenIds.has(mission.id)) {
+      const uniqueId = crypto.randomUUID();
+      seenIds.add(uniqueId);
+      return {
+        ...mission,
+        id: uniqueId,
+      };
+    }
+
+    seenIds.add(mission.id);
+    return mission;
+  });
+}
+
 function normalizeReward(value: unknown): Reward | null {
   if (!isRecord(value)) {
     return null;
@@ -141,9 +159,11 @@ function normalizeGameState(value: unknown): GameState {
       return acc;
     }, {} as GameState["stats"]),
     missions: Array.isArray(value.missions)
-      ? value.missions
-          .map(normalizeMission)
-          .filter((mission): mission is Mission => mission !== null)
+      ? ensureUniqueMissionIds(
+          value.missions
+            .map(normalizeMission)
+            .filter((mission): mission is Mission => mission !== null)
+        )
       : fallback.missions,
     rewards: Array.isArray(value.rewards)
       ? value.rewards

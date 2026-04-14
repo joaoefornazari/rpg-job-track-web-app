@@ -87,9 +87,22 @@ export default function MissionList({
                       <h3 className="text-lg font-semibold tracking-tight text-white">
                         {mission.title}
                       </h3>
-                      <span className={getStatusClasses(mission.status)}>
-                        {mission.status}
-                      </span>
+                      <div>
+                        <span className={getStatusClasses(mission.status)}>
+                          {mission.status}
+                        </span>
+                        <button
+                            type="button"
+                            onClick={() => onToggleInProgress(mission.id)}
+                            disabled={!canMarkInProgress}
+                            style={{ marginLeft: "12px", border: "1px solid #ffe", padding: "4px 8px", fontSize: "12px", borderRadius: "10px", cursor: "pointer" }}
+                            className="hover:bg-white/20 disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-slate-500"
+                          >
+                            {mission.status === "in progress"
+                              ? "STOP"
+                              : "START"}
+                          </button>
+                      </div>
                     </div>
 
                     <p className="max-w-4xl text-xs leading-6 text-slate-300">
@@ -121,17 +134,6 @@ export default function MissionList({
                       </p>
 
                       <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-                        <button
-                          type="button"
-                          onClick={() => onToggleInProgress(mission.id)}
-                          disabled={!canMarkInProgress}
-                          className="action-secondary w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-                        >
-                          {mission.status === "in progress"
-                            ? "Mark ready"
-                            : "Mark in progress"}
-                        </button>
-
                         <button
                           type="button"
                           className="action-secondary w-full sm:w-auto"
