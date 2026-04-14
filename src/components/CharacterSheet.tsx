@@ -93,8 +93,8 @@ export default function CharacterSheet({ state }: Props) {
                 <p className="field-label">Cosmetics</p>
                 <p className="max-w-sm text-sm leading-7 text-slate-300">
                   {character.cosmetics.length > 0
-                    ? "Unlocked visual rewards for your character."
-                    : "No cosmetics unlocked yet. Finish more missions to grow your collection."}
+                    ? ""
+                    : "No cosmetics unlocked yet. Finish more missions to grow your collection!"}
                 </p>
               </div>
 
@@ -106,10 +106,14 @@ export default function CharacterSheet({ state }: Props) {
                   character.cosmetics.map((cosmetic) => (
                     <span
                       key={`${cosmetic.name}-${cosmetic.value}`}
-                      className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-2 text-sm text-cyan-100"
+                      className="flex flex-row items-center gap-2 p-4 rounded border border-cyan-300/20"
+                      style={{ width: "100%" }}
                     >
-                      <span>{cosmetic.emoji || "✨"}</span>
-                      <span>{cosmetic.name}</span>
+                      <span style={{ width: "25%", textAlign: "center", fontSize: "1.5rem" }}>{cosmetic.emoji}</span>
+                      <div className="flex flex-col gap-2 items-start" >
+                        <span style={{ fontSize: '0.5rem' }} className="font-semibold border border-white-200 rounded-full px-3 py-1" >{cosmetic.name}</span>
+                        <span style={{ fontSize: '0.8rem'}} >{cosmetic.value}</span>
+                      </div>
                     </span>
                   ))
                 ) : (
