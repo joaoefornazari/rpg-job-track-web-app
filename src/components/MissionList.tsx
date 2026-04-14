@@ -4,7 +4,7 @@ import { missionPrompt } from "../utils/prompt";
 
 interface Props {
   missions: Mission[];
-  onMarkInProgress: (missionId: string) => void;
+  onToggleInProgress: (missionId: string) => void;
   onComplete: (
     missionId: string,
     xp: number,
@@ -14,7 +14,7 @@ interface Props {
 
 export default function MissionList({
   missions,
-  onMarkInProgress,
+  onToggleInProgress,
   onComplete,
 }: Props) {
   const [activeMissionId, setActiveMissionId] = useState<string | null>(null);
@@ -72,7 +72,7 @@ export default function MissionList({
           {missions.map((mission) => {
             const isActive = activeMissionId === mission.id;
             const canMarkInProgress =
-              mission.status !== "in progress" && mission.status !== "finished";
+              mission.status !== "finished";
             const canComplete =
               mission.status === "ready" || mission.status === "in progress";
 
@@ -123,12 +123,12 @@ export default function MissionList({
                       <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
                         <button
                           type="button"
-                          onClick={() => onMarkInProgress(mission.id)}
+                          onClick={() => onToggleInProgress(mission.id)}
                           disabled={!canMarkInProgress}
                           className="action-secondary w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                         >
                           {mission.status === "in progress"
-                            ? "In progress"
+                            ? "Mark ready"
                             : "Mark in progress"}
                         </button>
 

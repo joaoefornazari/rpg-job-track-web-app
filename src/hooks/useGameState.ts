@@ -183,14 +183,15 @@ export function useGameState() {
     }));
   }
 
-  function markMissionInProgress(missionId: string) {
+  function toggleMissionInProgress(missionId: string) {
     rawSetState((prev) => ({
       ...prev,
       missions: prev.missions.map((mission) =>
         mission.id === missionId && mission.status !== "finished"
           ? {
               ...mission,
-              status: "in progress" as const,
+              status:
+                mission.status === "in progress" ? "ready" : "in progress",
             }
           : mission
       ),
@@ -245,7 +246,7 @@ export function useGameState() {
   return {
     state,
     addMission,
-    markMissionInProgress,
+    toggleMissionInProgress,
     completeMission,
     importState,
     setState,
